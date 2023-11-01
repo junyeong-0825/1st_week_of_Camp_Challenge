@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class card : MonoBehaviour
 {
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,12 @@ public class card : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OepnCard()
+    {
+        anim.SetBool("isOpen", true);
+        transform.Find("Front").gameObject.SetActive(true);
+        transform.Find("Back").gameObject.SetActive(false);
     }
 }
