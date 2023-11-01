@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     {
         //카드 리스트 작성
         int[] teams = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 };
+        //랜덤하게 섞기 나중에 다른코드로 바꿔보자!
+        teams = teams.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
         //카드의 생성은 게임매니저가!
         for (int i = 0;i < 20;i++)
         {
