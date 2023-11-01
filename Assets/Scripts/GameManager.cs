@@ -28,7 +28,10 @@ public class GameManager : MonoBehaviour
             float y = (i % 5) * 1.2f - 4.0f;
             newCard.transform.position = new Vector3(x, y, 0);
 
-            Debug.Log(teams[i]);
+            //이미지 이름을 만들어두고 새 카드 아래 front를 찾아 sprite를 변경 해야한다.
+            //Resources폴더에 있는 teamsName 이미지를 가져오자
+            string teamName = "team" + teams[i].ToString();
+            newCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(teamName);
         }
     }
 
