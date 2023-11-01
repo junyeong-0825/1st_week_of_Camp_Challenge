@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //카드 리스트 작성
+        int[] teams = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 };
         //카드의 생성은 게임매니저가!
         for (int i = 0;i < 20;i++)
         {
@@ -18,11 +20,12 @@ public class GameManager : MonoBehaviour
             GameObject newCard = Instantiate(Card);//카드 생성
             newCard.transform.parent = GameObject.Find("Cards").transform;//생성되는 카드들은 Cards의 Child로 생성된다.
 
+            //카드 위치 잡기
+            float x = (i / 5) * 1.2f - 1.8f;
+            float y = (i % 5) * 1.2f - 4.0f;
+            newCard.transform.position = new Vector3(x, y, 0);
 
-
-
-
-
+            Debug.Log(teams[i]);
         }
     }
 
