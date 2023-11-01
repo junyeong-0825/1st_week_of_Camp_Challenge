@@ -7,8 +7,19 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject Card;
+    public GameObject FirstCard;
+    public GameObject SecondCard;
     public Text TimeTxt;
+    public GameObject endTxt;
+    public static GameManager I;
     float time = 0.0f;
+
+
+    void Awake()
+    {
+        I = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,4 +54,36 @@ public class GameManager : MonoBehaviour
         //변수 time에 저장된 시간을 소수점 둘째 자리까지 출력
         TimeTxt.text = time.ToString("N2");
     }
+
+    public void isMatched()
+    {
+        //첫번째 카드로 지목된 Card의 Front가 가지고 있는 스프라이트의 이름을 찾는다.
+        string FirstCardImage = FirstCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name;
+        string SecnodCardImage = SecondCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name;
+        //첫번째 카드와 두번째 카드의 스프라이트 이름이 같은지 다른지 판단
+        if(FirstCardImage == SecnodCardImage)
+        {
+            FirstCard.GetComponent<card>().destroyCard();
+            SecondCard.GetComponent<card>().destroyCard();
+
+            int cardLeft = GameObject.Find("Cards").transform.childCount;
+            if (cardLeft == 2)
+            {
+                endTxt.SetActive(true);
+                Time.timeScale = 0.0f;
+            }
+        }
+        else
+        {
+
+            FirstCard.GetComponent<card>().closeCard();
+            SecondCard.GetComponent<card>().closeCard();
+        }
+        //판단후 카드를 다시 뽑을 수 있도록 목록을 초기화
+        FirstCard = null;
+        SecondCard = null;
+
+    }
+
+  
 }
