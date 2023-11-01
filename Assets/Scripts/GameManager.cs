@@ -5,12 +5,25 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject Card;
     public Text TimeTxt;
     float time = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //카드의 생성은 게임매니저가!
+        for (int i = 0;i < 20;i++)
+        {
+            //반복문 정상 작동 확인! 20장으로 나열하고 싶어서 조건으로 I<20을 달았다.
+            GameObject newCard = Instantiate(Card);//카드 생성
+            newCard.transform.parent = GameObject.Find("Cards").transform;//생성되는 카드들은 Cards의 Child로 생성된다.
+
+
+
+
+
+
+        }
     }
 
     // Update is called once per frame
