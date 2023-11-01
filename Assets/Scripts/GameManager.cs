@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        Time.timeScale = 1.0f;
         //카드 리스트 작성
         int[] teams = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 };
         //랜덤하게 섞기 나중에 다른코드로 바꿔보자!
@@ -53,6 +55,11 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
         //변수 time에 저장된 시간을 소수점 둘째 자리까지 출력
         TimeTxt.text = time.ToString("N2");
+        if (time >= 30f)
+        {
+            Invoke("GameEnd", 0f);
+        }
+        
     }
 
     public void isMatched()
@@ -83,6 +90,11 @@ public class GameManager : MonoBehaviour
         FirstCard = null;
         SecondCard = null;
 
+    }
+    void GameEnd()
+    {
+        endTxt.SetActive(true);
+        Time.timeScale = 0.0f;
     }
 
   
