@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         TimeTxt.text = time.ToString("N2");
         if (time >= 30f)
         {
-            Invoke("GameEnd", 0f);
+            Invoke("GameOver", 0f);
         }
         
     }
