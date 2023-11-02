@@ -7,10 +7,12 @@ public class card : MonoBehaviour
     public AudioClip flip;
     public AudioSource audioSource;
     public Animator anim;
+    public bool flipCount = false;
+    SpriteRenderer cardBack;
     // Start is called before the first frame update
     void Start()
     {
-        
+        cardBack = transform.Find("Back").gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -37,6 +39,8 @@ public class card : MonoBehaviour
             GameManager.I.SecondCard = gameObject;
             GameManager.I.isMatched();
         }
+        flipCount = true;
+        CardBackColorChange();
     }
 
     public void destroyCard()
@@ -58,5 +62,13 @@ public class card : MonoBehaviour
         anim.SetBool("isOpen", false);
         transform.Find("Back").gameObject.SetActive(true);
         transform.Find("Front").gameObject.SetActive(false);
+    }
+
+    void CardBackColorChange()
+    {
+        if (flipCount == true)
+        {
+            cardBack.color = new Color(0.9f, 0.9f, 0.9f);
+        }
     }
 }
