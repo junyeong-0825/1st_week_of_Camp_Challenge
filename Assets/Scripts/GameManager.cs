@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject SecondCard;
     public Text TimeTxt;
     public GameObject endTxt;
+    public GameObject failTxt;
+    public GameObject successTxt;
     public static GameManager I;
 
     public AudioClip match;
@@ -74,6 +76,9 @@ public class GameManager : MonoBehaviour
         //첫번째 카드와 두번째 카드의 스프라이트 이름이 같은지 다른지 판단
         if(FirstCardImage == SecnodCardImage)
         {
+            GameObject newSuccessTxt = Instantiate(successTxt);
+            newSuccessTxt.transform.parent = GameObject.Find("Canvas").transform;
+            newSuccessTxt.transform.position = new Vector3(380f, 940f, 0f);
             audioSource.PlayOneShot(match);
 
             FirstCard.GetComponent<card>().destroyCard();
@@ -86,9 +91,12 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0.0f;
             }
         }
-        else
+        else//매칭에 실패했을 경우
         {
             audioSource.PlayOneShot(dismatch);
+            GameObject newFailTxt = Instantiate(failTxt);
+            newFailTxt.transform.parent = GameObject.Find("Canvas").transform;
+            newFailTxt.transform.position = new Vector3(380f, 940f, 0f);
             FirstCard.GetComponent<card>().closeCard();
             SecondCard.GetComponent<card>().closeCard();
         }

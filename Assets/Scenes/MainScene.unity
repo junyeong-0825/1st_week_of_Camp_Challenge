@@ -808,6 +808,8 @@ MonoBehaviour:
   SecondCard: {fileID: 0}
   TimeTxt: {fileID: 1356629204}
   endTxt: {fileID: 329849824}
+  failTxt: {fileID: 1970306026073914638, guid: 9d2714e22d052cc4db46e06ffd0c64d2, type: 3}
+  successTxt: {fileID: 1955028230495351717, guid: 4ebc3268789335c479111ddf635b36e9, type: 3}
   match: {fileID: 8300000, guid: 023c13d428fdb1d449c113da9a2616f3, type: 3}
   dismatch: {fileID: 8300000, guid: 5bcf8e19855e4924ca5c464bec73cc4d, type: 3}
   audioSource: {fileID: 1793607761}
