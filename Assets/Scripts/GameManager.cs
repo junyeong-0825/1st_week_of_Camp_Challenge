@@ -12,8 +12,7 @@ public class GameManager : MonoBehaviour
     public Text TimeTxt;
     public Text CountTxt;
     public GameObject endPanel;
-    public GameObject failTxt;
-    public GameObject successTxt;
+    public GameObject MatchTxt;
     public static GameManager I;
 
     public AudioClip match;
@@ -77,11 +76,9 @@ public class GameManager : MonoBehaviour
         //첫번째 카드와 두번째 카드의 스프라이트 이름이 같은지 다른지 판단
         if(FirstCardImage == SecnodCardImage)
         {
-            GameObject newSuccessTxt = Instantiate(successTxt);
-            newSuccessTxt.transform.parent = GameObject.Find("Canvas").transform;
-            newSuccessTxt.transform.position = new Vector3(380f, 940f, 0f);
+           
             audioSource.PlayOneShot(match);
-
+            VSMTxt();
             FirstCard.GetComponent<card>().destroyCard();
             SecondCard.GetComponent<card>().destroyCard();
 
@@ -94,9 +91,7 @@ public class GameManager : MonoBehaviour
         else//매칭에 실패했을 경우
         {
             audioSource.PlayOneShot(dismatch);
-            GameObject newFailTxt = Instantiate(failTxt);
-            newFailTxt.transform.parent = GameObject.Find("Canvas").transform;
-            newFailTxt.transform.position = new Vector3(380f, 940f, 0f);
+            VFMTxt();
             FirstCard.GetComponent<card>().closeCard();
             SecondCard.GetComponent<card>().closeCard();
         }
@@ -104,6 +99,7 @@ public class GameManager : MonoBehaviour
         FirstCard = null;
         SecondCard = null;
         count++;
+        OffMtxt();
     }
     void GameOver()
     {
@@ -111,6 +107,24 @@ public class GameManager : MonoBehaviour
         endPanel.SetActive(true);
         Time.timeScale = 0.0f;
     }
-
-  
+    void VSMTxt()//매칭성공했을때 보여주는 MatchTxt
+    {
+        MatchTxt.SetActive(true);
+        MatchTxt.GetComponent<MatchTxt>().SuOnFaOff();
+    }
+    void VFMTxt()//매칭실패 했을때 보여주는 MatchTxt
+    {
+        MatchTxt.SetActive(true);
+        MatchTxt.GetComponent<MatchTxt>().FaONSuOff(); 
+    }
+    void OffMtxt()
+    {
+        Invoke("OffMTxtInvoke", 0.2f);
+    }
+    
+    
+    void OffMTxtInvoke()
+    {
+        MatchTxt.SetActive(false);
+    }
 }
