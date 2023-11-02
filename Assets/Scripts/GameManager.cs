@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public Text TimeTxt;
     public GameObject endTxt;
     public static GameManager I;
+
+    public AudioClip match;
+    public AudioClip dismatch;
+    public AudioSource audioSource;
     float time = 0.0f;
 
 
@@ -70,6 +74,8 @@ public class GameManager : MonoBehaviour
         //첫번째 카드와 두번째 카드의 스프라이트 이름이 같은지 다른지 판단
         if(FirstCardImage == SecnodCardImage)
         {
+            audioSource.PlayOneShot(match);
+
             FirstCard.GetComponent<card>().destroyCard();
             SecondCard.GetComponent<card>().destroyCard();
 
@@ -82,7 +88,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
+            audioSource.PlayOneShot(dismatch);
             FirstCard.GetComponent<card>().closeCard();
             SecondCard.GetComponent<card>().closeCard();
         }

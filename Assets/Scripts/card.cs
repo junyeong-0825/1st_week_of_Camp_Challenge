@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class card : MonoBehaviour
 {
+    public AudioClip flip;
+    public AudioSource audioSource;
     public Animator anim;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,7 @@ public class card : MonoBehaviour
 
     public void OepnCard()
     {
+        audioSource.PlayOneShot(flip);
         anim.SetBool("isOpen", true);
         transform.Find("Front").gameObject.SetActive(true);
         transform.Find("Back").gameObject.SetActive(false);
