@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject FirstCard;
     public GameObject SecondCard;
     public Text TimeTxt;
-    public GameObject endTxt;
+    public Text CountTxt;
+    public GameObject endPanel;
     public GameObject failTxt;
     public GameObject successTxt;
     public static GameManager I;
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
     public AudioClip dismatch;
     public AudioSource audioSource;
     float time = 0.0f;
-
+    int count = 0;
 
     void Awake()
     {
@@ -87,8 +88,7 @@ public class GameManager : MonoBehaviour
             int cardLeft = GameObject.Find("Cards").transform.childCount;
             if (cardLeft == 2)
             {
-                endTxt.SetActive(true);
-                Time.timeScale = 0.0f;
+                GameOver();
             }
         }
         else//매칭에 실패했을 경우
@@ -103,11 +103,12 @@ public class GameManager : MonoBehaviour
         //판단후 카드를 다시 뽑을 수 있도록 목록을 초기화
         FirstCard = null;
         SecondCard = null;
-
+        count++;
     }
-    void GameEnd()
+    void GameOver()
     {
-        endTxt.SetActive(true);
+        CountTxt.text = count.ToString();
+        endPanel.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
